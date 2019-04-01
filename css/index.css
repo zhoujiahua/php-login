@@ -1,0 +1,16 @@
+@charset "utf-8";
+.header .nav-bar {
+  background-color: #1E9FFF;
+}
+.header .nav-bar .menu-navbar .layui-nav {
+  padding: initial;
+}
+.main .home-item .ip-box {
+  height: 180px;
+}
+.main .home-item .ip-box h1 {
+  color: #2a2a2a;
+}
+.login-box {
+  padding: 30px 0;
+}

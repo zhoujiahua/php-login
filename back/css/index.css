@@ -1,0 +1,17 @@
+@charset "UTF-8";
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}
+.wrapper .main {
+  min-height: 100%;
+}
+.wrapper .main .login {
+  width: 312px;
+  margin: 0 auto;
+  margin-top: 200px;
+}

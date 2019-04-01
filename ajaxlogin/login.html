@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <style>
+        .login {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box login active">
+        <div class="form-group">
+            <label class="sr-only" for="">账户：</label>
+            <input type="text" name="user" class="form-control" placeholder="用户名">
+            <br>
+            <label class="sr-only" for="">密码：</label>
+            <input type="password" name="pass" class="form-control" placeholder="密码">
+        </div>
+        <button type="button" name="loginSubmit" class="btn btn-primary">登录</button>
+    </div>
+    <div class="login-tab login">
+        <h1>登录成功！</h1>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.0/jquery.js"></script>
+    <script>
+        var itemCookie = document.cookie.length;
+        if (itemCookie > 0) {
+            $(".login").removeClass("active");
+            $(".login-tab").addClass("active");
+        } else {
+            $(".login").removeClass("active");
+            $(".login-box").addClass("active");
+        }
+
+        $('[name="loginSubmit"]').on("click", function () {
+            var uname = $('[name="user"]').val().trim(),
+                upass = $('[name="pass"]').val().trim();
+            if (uname.length > 0 && upass.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "login.php",
+                    data: {
+                        uname: uname,
+                        upass: upass
+                    },
+                    dataType: "json",
+                    success: function (res) {
+                        console.log(res);
+                        if (res.code == "success") {
+                            $(".login").removeClass("active");
+                            $(".login-tab").addClass("active");
+                            location.href = "/admin.php";
+                        }
+                        if (res.code == "error") {
+                            $(".login").removeClass("active");
+                            $(".login-box").addClass("active");
+                            alert("登录失败！");
+                            return false;
+                        }
+                    }
+                });
+            } else {
+                alert("账户或密码不能为空！");
+                return false;
+            }
+        })
+    </script>
+</body>
+
+</html>
